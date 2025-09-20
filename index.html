@@ -12,13 +12,133 @@
 </head>
 
 <body>
+
   <!--Building the header-->
   <div class="container">
   <div class="header">
   <h1>🏋️‍♂️ FitTrack Pro</h1> 
   <p>Your Ultimate Interactive Fitness & Health Companion</p>
   </div>
-  
+
+  <!--Building Total Workouts-->
+  <div class="stats">
+  <div class="stat-item">
+  <span class="stat-number" id="totalWorkouts">0</span>
+  <span class="stat-label">Total Workouts</span>
+  </div>
+
+  <!--Building Minutes Exercised-->
+  <div class="stat-item">
+    <span class="stat-number" id="totalMinutes">0</span>
+    <span class="stat-label">Minutes Exercised</span>
+  </div>
+
+  <!--Building Calories Burned-->
+  <div class="stat-item">
+    <span class="stat-number" id="caloriesBurned">0</span>
+    <span class="stat-label">Calories Burned</span>
+  </div>
+
+  <!--Day Streak-->
+  <div class="stat-item">
+    <span class="stat-number" id="currentStreak">0</span>
+    <span class="stat-label">Day Streak</span>
+  </div>
+
+  <div class="dashboard">
+    <!--Workout Loddger-->
+    <div class="card">
+      <h3>💪 Workout Logger</h3>
+      <div class="form-group">
+        <label for="workoutType">Exercise Type:</label>
+        <select id="workoutType">
+          <option value="cardio">Cardio</option>
+          <option value="strenght">Strenght Training</option>
+          <option value="yoga">Yoga</option>
+          <option value="running">Running</option>
+          <option value="cycling">cycling</option>
+          <option value="swimming">Swimming</option>
+        </select>
+  </div>
+
+  <!--Workout Duration-->
+  <div class="form-group">
+    <label for="workoutDuration">Duration (minutes):</label>
+    <input type="number" id="workoutDuration" placeholder="30" min="1" max="300">
+  </div>
+
+  <!--Workout Intensity-->
+  <div class="form-group">
+    <label for="workoutIntensity">Intensity:</label>
+<select id="workoutIntensity">
+  <option value="low">Low</option>
+  <option value="moderate">Moderate</option>
+  <option value="high">High</option>
+</select>
+  </div>
+
+  <!--Log Workout-->
+  <button class="btn" >Log Workout</button>
+  <div class="workout-log"></div>
+    </div>
+
+    <!--Progress Chart-->
+    <div class="card">
+      <h3>📊 Progress Chart</h3>
+      <div class="progress-chart">
+      </div>
+    </div>
+
+    <!--BMI Calculator-->
+    <div class="card">
+      <h3>>⚖️ BMI Calculator</h3>
+      <div class="form-group">
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" placeholder="70" step="0.1">
+      </div>
+    
+      <!--Height-->
+      <div class="form-group">
+        <label for="height">Height</label>
+        <input type="number" id="height" placeholder="175">
+      </div>
+
+      <button class="btn" onclick="">Calculate BMI</button>
+      <div id="bmiResult" class="bmi=result"></div>
+    </div>
+
+    <!--Nutrition Lookup-->
+    <div class="card">
+      <h3>🍎 Nutrition Lookup</h3>
+    <div class="form-group">
+<label for="foodQuery">Search Food:</label>
+<input type="text" id="foodQuery" placeholder="e.g., chicken breast,apple, oatmeal">
+    </div>
+
+    <button class="btn" onclick="">Search Nutrition</button>
+    <div id="nutritionResults" class="nutrition-results"></div>
+    </div>
+
+    <!--Achievements-->
+    <div class="card">
+      <h3>🏆 Achievements & Badges</h3>
+      <div id="badges" class="badges"></div>
+      <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+        <h4>🎯 Goals Progress:</h4>
+        <div style="margin-top: 10px;"> 
+        <div style="margin-bottom:8px;">Weekly Workout: <span id="weeklyProgress">0/5</span></div> 
+
+        <div style="background: #e0e0e0; height: 10px; border-radius: 5px;">
+          <div id="weeklyBar" style="background: linear-gradient(45deg, #667eea, #764ba2); height: 100%; border-radius: 5px; width: 0%; transition: width: 0.3sease;"></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    </div>
+
+<script src="assets/js/script.js"></script>
+
 </body>
 
 
