@@ -381,10 +381,57 @@ updateAchievementDisplay();
 saveData();
 }
 
+//Update achievement display
+function updateAchievementDisplay() {
+  const badgesDiv = document.getElementById('badges');
+  const achievementData = [
+    { id: 'first_workout', name: '🎯 First Step', desc: 'Completed first workout'},
+    { id: 'consistent', name: '🔥 Getting Consistent', desc: '5 workouts completed'},
+     { id: 'dedicated', name: '💪 Dedicated', desc: '10 workouts completed'},
+      { id: 'hour_power', name: '⏰ Hour Power', desc: '60+ minutes exercised'},
+       { id: 'time_warrior', name: '⚔️ Time Warrior', desc: '300+ minutes exercised'},
+      { id: 'calorie_crusher', name: '🔥 Calorie Crusher', desc: '500+ calories burned'},
+      { id: 'burn_master', name: '🚀 Burn Master', desc: ' 1000+ calorie burned'},
+      { id: 'streak_starter', name: '📅 Streak Starter', desc: '3-day streak'},
+       { id: 'week_warrior', name: '👑 Week Warrior', desc: '7-day streak'},
+  ];
+
+  const earnedBadges = achievementData.filter(a=> achievements.includes(a.id));
+
+  badgesDiv.innerHTML = earnedBadges.length > 0?
+  earnedBadges.map(badge => `
+    <div class="badge" title="${badge.desc}">
+      ${badge.name}
+    </div>
+ `).join(''):
+ '<p style="color:#666; font-style:italic;">Start working out to earn your first badge! 🏆 </p>';
 }
 
+//Show notification
+function showNotification(message) {
+  const notification = document.createElement('div');
+  notification.style.cssText = `
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  padding: 15px 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  z-index: 1000;
+  font-weight: 600;
+  animation: slideIn 0.5s ease;
+  `;
+
+  notification.textContent = message;
+  document.body.appendChild(notification);
+
+  setTimeout(() => {
+    notification.style.opacity = '0';
+    notification.style.transform = 'translateY(-10px)';
+    setTimeout(() => notification.remove(), 500);
+  }, 2500);
 
 }
 
-
-}
