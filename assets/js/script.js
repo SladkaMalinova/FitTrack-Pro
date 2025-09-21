@@ -203,6 +203,75 @@ updateChart();
 }
 
 //Update progress chart with recent data
+function updateChart() {
+  const last7Days = [];
+  const caloriesData = [];
+  const today = new Date();
+
+  for (let i = 6, i >=0; i--) {
+    const date = new Date(today);
+    date.setDate(date.getDate() -i);
+    last7Days.push(date.toLocateDateString('en-US', {month: 'short', day: 'numeric'}));
+
+    const dayCalories = workouts
+    .filter(w=> w.date === dateString)
+    .reduce((sum, w) => sum + w.calories, 0);
+
+    caloriesData.push(dayCalories);
+  }
+
+  chart.data.labels = last7Days;
+  chart.data.datasets[0].data = caloriesData;
+  chart.update();
+
+}
+
+//BMI Calculator
+function calculateBMI() {
+  const weight = parseFloat(document.getElementById('weight').value);
+  const height = parseFloat(document.getElementById('height').value);
+
+if (!weight || !height) {
+  alert('Please enter both weight and height!');
+  return;
+}
+
+const heightInMeters = height /100;
+const bmi = weight / (heightInMeters * heightInMeters);
+const resultDiv = document.getElementById('bmiResult');
+
+let category, color, advice;
+
+if (bmi < 18.5) {
+  category = 'Underweight';
+  color = '#3498db';
+  advice = 'Consider consulting a healthcare professional about healthy weight gain strategies.';
+} else if (bmi < 25) {
+  category = 'Normal Weight';
+  color = '#27ae60';
+  advice = 'Great! Maintain your healthy lifestyle with regular exercise and balanced nutrition.';
+
+}else if (bmi < 30){
+  category = 'Overweight';
+  color = '#f39c12';
+  advice = 'Consider increasing physical activity and reviewing your diet with healthcare professional.';
+
+} else{
+  category = 'Obese';
+  color = '#e74c3c';
+  advice = 'Please consult with a healthcare professional for a personalised weight management plan.';
+}
+
+resultDiv.innerHTML = `
+<div style ="background-color: ${color}; color:white;">
+<h4>Your BMI: ${bmi.toFixed(1)}</h4>
+<p><stong>Category:</strong></p>
+</div>
+
+`;
+
+}
+
 
 }
 
