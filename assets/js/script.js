@@ -290,6 +290,27 @@ setTimeout(() => {
 },1000);
 }
 
+//Generate mock nutrition data
+function generateMockNutritionData(query) {
+const foods = {
+  'apple': {calories: 52, protein:0.3, carbs: 14, fat 0.2, fiber: 2.4},
+  'chicken breast': {calories: 165, protein:31, carbs: 0, fat: 3.6, fiber: 0},
+  'oatmeal': {calories: 68, protein:2.4, carbs: 12, fat: 1.4, fiber: 1.7},
+  'banana' : {calories: 89, protein: 1.1, carbs: 23, fat: 0.3, fiber: 2.6},
+  'salmon' : {calories: 208, protein: 20, carbs: 0, fat: 13, fiber: 0},
+  'broccoli' : {calories: 34, protein: 2.8, carbs: 7, fat: 0.4, fiber: 2.6},
+  'rice' : {calories: 130, protein: 2.7, carbs: 28, fat: 0.3, fiber: 0.4},
+   'egg' : {calories: 155, protein: 13, carbs: 1.1, fat: 11, fiber: 0},
+};
+
+const searchKey = Object.keys(foods).find(key =>
+  query.toLowerCase().includes(key) || key.includes(query.toLowerCase())
+);
+
+return searchKey? {name: searchKey, ...foods[searchKey]}:
+{name: query, calories:100, protein:5, carbs:15, fat:3, fiber:2};
+}
+
 
 }
 
