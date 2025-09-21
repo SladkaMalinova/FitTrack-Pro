@@ -311,6 +311,25 @@ return searchKey? {name: searchKey, ...foods[searchKey]}:
 {name: query, calories:100, protein:5, carbs:15, fat:3, fiber:2};
 }
 
+//Display nuturition results
+function displayNutritionResults(data) {
+  const resultDiv = document.getElementById('nutritionResults');
+  resultDiv.innerHTML = `
+  <div class="food-item">
+  <h4>${data.name.charAt(0).toUpperCase() + data.name.slice(1)} (per 100g)</h4>
+  <div style="display:grid;grid-template-columns:repeat(2, 1fr); gap: 10px;
+  margin-top: 10px;">
+
+  <div>🔥Calories: ${data.calories}</div>
+  <div>💪Protein: ${data.protein}g</div>
+  <div>🍞Carbs: ${data.carbs}g</div>
+  <div>🥑Fat: ${data.fat}g</div>
+  <div>🌾Fiber: ${data.fiber}g</div>
+  <div>⚡Energy: ${Math.round(data.calories * 4. 184)}kj</div>
+  </div>
+  </div>
+  `;
+}
 
 }
 
