@@ -331,6 +331,56 @@ function displayNutritionResults(data) {
   `;
 }
 
+//Achievement system
+function checkAchievements() {
+const newAchievements = [];
+
+if (totalStats.workouts >= 1 &&!achievements.includes('first_workout')) {
+  newAchievements.push({id: 'first_workout', name:' 🎯 First Step', desc: 'Completed your first workout!'});
+}
+
+if (totalStats.workouts >=5 &&!achievements.includes('consistent')) {
+  newAchievements.push({id:'consistent', name: '🔥Getting Consistent',desc:'5 workouts completed!'});
+}
+
+if(totalStats.workouts >= 10 &&! achievements.includes('dedicated')) {
+  newAchievements.push({id: 'dedicated', name: '💪 Dedicated', desc: '10 workouts completed!'});
+}
+
+if(totalStats.workouts >= 60 &&! achievements.includes('hour_power')) {
+  newAchievements.push({id: 'hour_power', name: '⏰ Hour Power', desc: '60+ minutes of exercise!'});
+}
+
+if(totalStats.workouts >= 300 &&! achievements.includes('time_warrior')) {
+  newAchievements.push({id: 'time_warrior', name: '⚔️  Time Warrior', desc: '5+ hours of exercise!'});
+}
+
+if(totalStats.workouts >= 500 &&! achievements.includes('calorie_crusher')) {
+  newAchievements.push({id: 'calorie_crusher', name: '🔥 Calorie Crusher', desc: '500+ calories burned!'});
+}
+
+if(totalStats.workouts >= 1000 &&! achievements.includes('burn_master')) {
+  newAchievements.push({id: 'burn_master', name: '🚀 Burn Master', desc: '1000+ calories burned'});
+}
+
+const currentStreak = calculateStreak();
+if (currentStreak >= 3 &&!achievements.includes('streak_starter')) {
+  newAchievements.push({id: 'streak_starter', name: '📅Streak Starter', desc: '3-day workout streak!'});
+}
+
+if (currentStreak >= 7 &&!achievements.includes('week_warrior')) {
+  newAchievements.push({id: 'week_warrior', name: ' 👑Week Warrior', desc: '7-day workout streak!'});
+}
+
+newAchievements.forEach(achievement => {
+achievements.push(achievement.id);
+showNotification(`🏆Achievements Unlocked: ${achievement.name}!`);
+});
+
+updateAchievementDisplay();
+saveData();
+}
+
 }
 
 
