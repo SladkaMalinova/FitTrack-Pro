@@ -272,6 +272,19 @@ resultDiv.innerHTML = `
 
 }
 
+//Nutrition lookup function
+async function searchNutrition() {
+  const query = document.getElementById('foodQuery').value.trim();
+  const resultDiv = document.getElementById('nutritionResults');
+
+  if (!query) {
+    alert('Please enter a food item to search!');
+    return;
+  }
+resultDiv.innerHTML = '<div class = "loading">Searching nutrition data...</div>';
+
+}
+
 
 }
 
