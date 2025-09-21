@@ -283,6 +283,14 @@ async function searchNutrition() {
   }
 resultDiv.innerHTML = '<div class = "loading">Searching nutrition data...</div>';
 
+//Simulate API call mock data
+setTimeout(() => {
+  const mockNutritionData = generateMockNutritionData(query);
+  displayNutritionResults(mockNutritionData);
+},1000);
+}
+
+
 }
 
 
