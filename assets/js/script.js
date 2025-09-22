@@ -9,7 +9,7 @@ let totalStats = {
 };
 
 //Initialise the applicaiton
-function init {
+function init() {
   loadData();
   initChart();
   updateStats();
@@ -60,8 +60,25 @@ function logWorkout() {
   checkAchievements();
   saveData();
 
+  //Feedback form 
+  document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name = document.getElementById('userName').value.trim();
+  const message = document.getElementById('userMessage').value.trim();
+
+  if (name && message) {
+    const feedback = { name, message, timestamp: new Date() };
+    const savedFeedback = JSON.parse(localStorage.getItem('fittrack_feedback') || '[]');
+    savedFeedback.push(feedback);
+    localStorage.setItem('fittrack_feedback', JSON.stringify(savedFeedback));
+
+    showNotification(`Thanks for your feedback, ${name}!`);
+    this.reset();
+  }
+});
+
 //Clear form
-document.getElementById('workoutDuration').value =";
+document.getElementById('workoutDuration').value ="";
 
 //Show success message
 showNotification('Great job! ${type} workout logged successfully! 🎉');
@@ -125,7 +142,7 @@ function updateStats() {
 
 //Calculate workout streak
 function calculateStreak() {
-  if (workout.length === 0) return 0;
+  if (workouts.length === 0) return 0;
 
   const today = new Date();
   let streak = 0;
@@ -157,7 +174,7 @@ function getThisWeekWorkouts() {
 let chart;
 function initChart() {
 const ctx = document.getElementById('progressChart').getContext('2d');
-chart = new chart(ctx, {
+chart = new Chart(ctx, {
 type: 'line',
 data: {
   labels: [],
@@ -208,12 +225,13 @@ function updateChart() {
   const caloriesData = [];
   const today = new Date();
 
-  for (let i = 6, i >=0; i--) {
+  for (let i=6, i >=0; i--) {
     const date = new Date(today);
     date.setDate(date.getDate() -i);
-    last7Days.push(date.toLocateDateString('en-US', {month: 'short', day: 'numeric'}));
+    last7Days.push(date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
 
     const dayCalories = workouts
+    const dateString = date.toLocaleDateString();
     .filter(w=> w.date === dateString)
     .reduce((sum, w) => sum + w.calories, 0);
 
@@ -265,7 +283,7 @@ if (bmi < 18.5) {
 resultDiv.innerHTML = `
 <div style ="background-color: ${color}; color:white;">
 <h4>Your BMI: ${bmi.toFixed(1)}</h4>
-<p><stong>Category:</strong></p>
+<p><strong>Category:</strong>${category}</p>
 </div>
 
 `;
@@ -293,7 +311,7 @@ setTimeout(() => {
 //Generate mock nutrition data
 function generateMockNutritionData(query) {
 const foods = {
-  'apple': {calories: 52, protein:0.3, carbs: 14, fat 0.2, fiber: 2.4},
+  'apple': {calories: 52, protein:0.3, carbs: 14, fat: 0.2, fiber: 2.4},
   'chicken breast': {calories: 165, protein:31, carbs: 0, fat: 3.6, fiber: 0},
   'oatmeal': {calories: 68, protein:2.4, carbs: 12, fat: 1.4, fiber: 1.7},
   'banana' : {calories: 89, protein: 1.1, carbs: 23, fat: 0.3, fiber: 2.6},
@@ -432,6 +450,8 @@ function showNotification(message) {
     notification.style.transform = 'translateY(-10px)';
     setTimeout(() => notification.remove(), 500);
   }, 2500);
+
+
 
 }
 

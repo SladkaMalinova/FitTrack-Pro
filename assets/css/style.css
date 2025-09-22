@@ -10,10 +10,11 @@ body {
   background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
   min-height: 100vh;
   color: #333;
+  overflow-x: hidden;
 }
 
 .container {
-  max-width: 1200 px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -52,12 +53,12 @@ body {
 
 /*Card Components */
 .card {
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 15px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+ background: rgba(255, 255, 255, 0.95);
+ border-radius: 15px;
+ padding: 25px;
+ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+ transition: transform 0.3s ease, box-shadow 0.3s ease;
+ border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card:hover {
@@ -183,6 +184,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 15px;
   margin-top: 20px;
+  margin-bottom: 30px;
  }
 
  .stat-item {
@@ -229,6 +231,79 @@ display: block;
   font-style: italic;
  }
 
+ .home-intro {
+  text-align: center;
+  padding: 40px 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  margin-bottom: 30px;
+  color: white;
+}
+.home-intro h2 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+.home-intro p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+.home-intro .btn {
+  font-size: 1em;
+  padding: 10px 20px;
+}
+
+/*.about {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 40px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}*/
+
+.about,
+.contact {
+  max-width: 800px; 
+  margin: 0 auto;
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.about h3 {
+  color: #667eea;
+  margin-bottom: 15px;
+}
+.about p {
+  font-size: 1em;
+  color: #333;
+}
+
+
+/*.contact {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 40px;
+}*/
+.contact h3 {
+  color: #764ba2;
+  margin-bottom: 10px;
+}
+.contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.contact input,
+.contact textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  font-size: 16px;
+}
+
  /* Responsive design */
  @media(max-width: 768px){
   .dashboard {
@@ -242,5 +317,13 @@ display: block;
  .stats {
   grid-template-columns: repeat(2, 1fr);
  }
- 
+
+ @media (max-width: 768px) {
+  .about,
+  .contact {
+    max-width: 95%;
+    padding: 20px;
+  }
+}
+
 }

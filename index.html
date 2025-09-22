@@ -13,6 +13,12 @@
 
 <body>
 
+  <section class="home-intro">
+  <h2>Welcome to FitTrack Pro</h2>
+  <p>Track your workouts, monitor your progress, and stay motivated with your personal fitness dashboard.</p>
+  <a href="#workoutLogger" class="btn">Get Started</a>
+</section>
+
   <!--Building the header-->
   <div class="container">
   <div class="header">
@@ -44,11 +50,11 @@
     <span class="stat-number" id="currentStreak">0</span>
     <span class="stat-label">Day Streak</span>
   </div>
+  </div>
 
   <div class="dashboard">
     <!--Workout Loddger-->
-    <div class="card">
-      <h3>💪 Workout Logger</h3>
+      <div class="card" id="workoutLogger">
       <div class="form-group">
         <label for="workoutType">Exercise Type:</label>
         <select id="workoutType">
@@ -130,7 +136,7 @@
         <div style="margin-bottom:8px;">Weekly Workout: <span id="weeklyProgress">0/5</span></div> 
 
         <div style="background: #e0e0e0; height: 10px; border-radius: 5px;">
-          <div id="weeklyBar" style="background: linear-gradient(45deg, #667eea, #764ba2); height: 100%; border-radius: 5px; width: 0%; transition: width: 0.3s ease;"></div>
+          <div id="weeklyBar" style="background: linear-gradient(45deg, #667eea, #764ba2); height: 100%; border-radius: 5px; width: 0%; transition: width 0.3s ease;"></div>
         </div>
         </div>
       </div>
@@ -140,8 +146,25 @@
 
 <script src="assets/js/script.js"></script>
 
+
+
+<section class="contact">
+  <h3>Feedback</h3>
+  <p>We’d love to hear your thoughts! Share your feedback or suggestions below:</p>
+    <form id="feedbackForm">
+  <input type="text" id="userName" placeholder="Your name" required />
+  <textarea id="userMessage" placeholder="Your message..." rows="4" required></textarea>
+  <button class="btn" type="submit">Send Feedback</button>
+</form>
+  </form>
+</section>
+
+
 </body>
 
-
+<section class="about">
+  <h3>About FitTrack Pro</h3>
+  <p>FitTrack Pro is a browser-based fitness tracker designed to help you stay on top of your health goals. Log workouts, calculate BMI, explore nutrition facts, and earn achievements—all in one place.</p>
+</section>
 
 </html>
