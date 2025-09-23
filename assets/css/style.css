@@ -1,3 +1,8 @@
+//Smooth scrolling for anchor links
+html {
+  scroll-behavior: smooth;
+}
+
 /* Global reset & base*/
 *{
 margin:0;
@@ -260,10 +265,11 @@ display: block;
   box-shadow: 0 4px 20px rgba(0,0,0,0.1);
 }*/
 
-.about,
-.contact {
-  max-width: 800px; 
-  margin: 0 auto;
+
+.contact,
+.about {
+  max-width: 800px;
+  margin: 40px auto;
   padding: 30px;
   border-radius: 15px;
   background: rgba(255, 255, 255, 0.95);
@@ -303,6 +309,28 @@ display: block;
   border: 2px solid #e0e0e0;
   font-size: 16px;
 }
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #667eea;
+  color: white;
+  margin-top: 40px;
+}
+
 
  /* Responsive design */
  @media(max-width: 768px){

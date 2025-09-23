@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+/* jshint esversion: 9 */
 //Global variables for data storage
 let workouts = [];
 let achievements = [];
@@ -14,53 +16,10 @@ function init() {
   initChart();
   updateStats();
   checkAchievements();
+  setupFeedbackForm();
 }
-
-//Load data from local storage
-function loadData() {
-  const savedWorkouts = JSON.parse(localStorage.getItem('fittrack_workouts') || '[]');
-  const savedStats = JSON.parse(localStorage.getItem('fittrack_stats') || '{"workouts":0,"minutes":0, "calories":0, "streak":0}');
-
-  const savedAchievements = JSON.parse(localStorage.getItem('fittrack_achievements') || '[]');
-
-  workouts = savedWorkouts;
-  totalStats = savedStats;
-  achievements = savedAchievements;
-}
-
-//Save data to local storage
-function logWorkout() {
-  const type = document.getElementById('workoutType').value;
-  const duration = parseInt(document.getElementById('workoutDuration').value);
-  const intensity = document.getElementById('workoutIntensity').value;
-
-  if(!duration || duration < 1) {
-    alert('Please enter a valid duration!');
-    return;
-  }
-
-  const calories = calculateCalories(type, duration, intensity);
-  const workout = {
-    type: type, 
-    duration: duration,
-    intensity: intensity,
-    calories:calories, 
-    date: new Date().toLocateDateString(),
-    timestamp: new Date()
-  };
-
-  workouts.push(workout);
-  totalStats.workouts++;
-  totalStats.minutes += duration;
-  totalStats.calories += calories;
-
-  updateWorkoutLog();
-  updateStats();
-  updateChart();
-  checkAchievements();
-  saveData();
-
-  //Feedback form 
+   //Feedback form 
+   function setupFeedbackForm() {
   document.getElementById('feedbackForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const name = document.getElementById('userName').value.trim();
@@ -76,12 +35,57 @@ function logWorkout() {
     this.reset();
   }
 });
+}
 
-//Clear form
-document.getElementById('workoutDuration').value ="";
+//Load data from local storage
+function loadData() {
+  const savedWorkouts = JSON.parse(localStorage.getItem('fittrack_workouts') || '[]');
+  const savedStats = JSON.parse(localStorage.getItem('fittrack_stats') || '{"workouts":0,"minutes":0, "calories":0, "streak":0}');
 
-//Show success message
-showNotification('Great job! ${type} workout logged successfully! 🎉');
+  const savedAchievements = JSON.parse(localStorage.getItem('fittrack_achievements') || '[]');
+
+  workouts = savedWorkouts;
+  totalStats = savedStats;
+  achievements = savedAchievements;
+}
+
+// Save data to local storage
+function logWorkout() {
+  const type = document.getElementById('workoutType').value;
+  const duration = parseInt(document.getElementById('workoutDuration').value);
+  const intensity = document.getElementById('workoutIntensity').value;
+
+  if (!duration || duration < 1) {
+    alert('Please enter a valid duration!');
+    return;
+  }
+
+  const calories = calculateCalories(type, duration, intensity);
+  const workout = {
+    type: type,
+    duration: duration,
+    intensity: intensity,
+    calories: calories,
+    date: new Date().toLocaleDateString(),
+    timestamp: new Date()
+  };
+
+  workouts.push(workout);
+  totalStats.workouts++;
+  totalStats.minutes += duration;
+  totalStats.calories += calories;
+
+  updateWorkoutLog();
+  updateStats();
+  updateChart();
+  checkAchievements();
+  saveData();
+
+  document.getElementById('workoutDuration').value = "";
+
+  showNotification(`Great job! ${type} workout logged successfully! 🎉`);
+}
+
 
 //Calculate calories burned
 function calculateCalories(type, duration, intensity) {
@@ -97,7 +101,7 @@ function calculateCalories(type, duration, intensity) {
   const intensityMultiplier = {
     low: 0.8,
     moderate: 1.0,
-    high: 1.0,
+    high: 1.0
   };
 
   return Math.round(baseCalories[type] * duration * intensityMultiplier[intensity]);
@@ -150,7 +154,7 @@ function calculateStreak() {
 
   for (let i=0; i < 30; i++) {
     const dateString = currentDate.toLocateDateString();
-    const hasWorkout = workout.some(w => w.date === dateString);
+    const hasWorkout = workouts.some(w => w.date === dateString);
 
     if(hasWorkout) {
       streak ++;
@@ -170,54 +174,53 @@ function getThisWeekWorkouts() {
   return workouts.filter(w => new Date(w.timestamp) >= startOfWeek).length;
 }
 
-//Initialize chart
+// Initialize chart
 let chart;
 function initChart() {
-const ctx = document.getElementById('progressChart').getContext('2d');
-chart = new Chart(ctx, {
-type: 'line',
-data: {
-  labels: [],
-  datasets: [{
-    label: 'Calories Burned',
-    data: [],
-    borderColor: ' #667eea ',
-    backgroundColor: 'rgba(102, 126, 234, 0.1)',
-    tension: 0.4,
-    fill: true
-  }]
-},
-
-options: {
-  responsive: true,
-  maintainAspectRatio:false,
-  plugins : {
-    legend: {
-      display: true,
-      position: 'top'
+  const ctx = document.getElementById('progressChart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        label: 'Calories Burned',
+        data: [],
+        borderColor: '#667eea',
+        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+        tension: 0.4,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: 'Calories'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Last 7 Days'
+          }
+        }
+      }
     }
-},
+  });
 
-scales: {
-  y: {
-    beginAtZero: true,
-    title: {
-      display: true,
-      text: 'Calories'
-    }
-  },
-x: {
-  display:true, 
-  text: 'Last 7 Days'
-}
-}
-}
+  updateChart();
 }
 
-});
-updateChart();
-
-}
 
 //Update progress chart with recent data
 function updateChart() {
@@ -225,14 +228,14 @@ function updateChart() {
   const caloriesData = [];
   const today = new Date();
 
-  for (let i=6, i >=0; i--) {
+  for (let i=6; i >=0; i--) {
     const date = new Date(today);
     date.setDate(date.getDate() -i);
     last7Days.push(date.toLocaleDateString('en-US', {month: 'short', day: 'numeric'}));
 
-    const dayCalories = workouts
     const dateString = date.toLocaleDateString();
-    .filter(w=> w.date === dateString)
+    const dayCalories = workouts
+    .filter(w => w.date === dateString)
     .reduce((sum, w) => sum + w.calories, 0);
 
     caloriesData.push(dayCalories);
@@ -343,7 +346,7 @@ function displayNutritionResults(data) {
   <div>🍞Carbs: ${data.carbs}g</div>
   <div>🥑Fat: ${data.fat}g</div>
   <div>🌾Fiber: ${data.fiber}g</div>
-  <div>⚡Energy: ${Math.round(data.calories * 4. 184)}kj</div>
+  <div>⚡Energy: ${Math.round(data.calories * 4.184)}kj</div>
   </div>
   </div>
   `;
@@ -450,7 +453,6 @@ function showNotification(message) {
     notification.style.transform = 'translateY(-10px)';
     setTimeout(() => notification.remove(), 500);
   }, 2500);
-
 
 
 }
