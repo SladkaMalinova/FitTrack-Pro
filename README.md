@@ -35,9 +35,18 @@ All code has been validated using official W3C tools:
 
 Validation screenshots are included in the `Validation` folder:
 
--[HTML Validation results (PDF)](assets/js/Validation/HTML_Validation%20result.pdf)
--[CSS Validation results (PDF)](assets/js/Validation/CSS_Validation%20result.pdf)
--[JavaScript Validation results (PDF)](assets/js/Validation/JavaScript_Validation%20result.pdf)
+### 📸 Included Screenshots
+
+Validation screenshots are included in the `/assets/js/Validation/` folder:
+
+- [HTML Validation (PDF)](assets/js/Validation/html-validation.pdf)  
+- [CSS Validation (PDF)](assets/js/Validation/css-validation.pdf)  
+- [JavaScript Validation (PDF)](assets/js/Validation/js-validation.pdf)
+
+These confirm that the project passes all syntax checks with **zero errors**.
+
+
+
 
 
 These confirm that the project passes all syntax checks with **zero errors**.
@@ -48,7 +57,7 @@ These confirm that the project passes all syntax checks with **zero errors**.
 
 The following wireframe shows the planned layout for **desktop, tablet, and mobile**:
 
-- [View Wireframes (PDF)](assets/wireframes/FitTrackPro_wireframes_mockups.pdf)
+- [View Wireframes (PDF)](assets/js/wireframes/wireframes.pdf)
 
 ---
 
