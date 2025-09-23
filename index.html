@@ -7,11 +7,11 @@
   <title>FitTrack Pro - Interactive Fitness & Health Tracker</title>
   <link rel="icon" type="image/png" href="assets/images/favicon.png">
 
-  <!--Link css-->
+  <!-- Link CSS -->
   <link rel="stylesheet" href="assets/css/style.css">
-  <!--Import Chart.js library for progress chart-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+
 </head>
+
 
 <body>
 
@@ -66,7 +66,7 @@
           <option value="running">Running</option>
           <option value="cycling">Cycling</option>
           <option value="swimming">Swimming</option>
-        </select>
+    </select>
   </div>
 
   <!--Workout Duration-->
@@ -85,9 +85,14 @@
 </select>
   </div>
 
+
+  
+
   <!--Log Workout-->
   <button class="btn" onclick="logWorkout()">Log Workout</button>
   <div class="workout-log" id="workoutLog"></div>
+  
+
     </div>
 
     <!--Progress Chart-->
@@ -98,35 +103,41 @@
       </div>
     </div>
 
-    <!--BMI Calculator-->
-    <div class="card">
-      <h3>⚖️ BMI Calculator</h3>
-      <div class="form-group">
-        <label for="weight">Weight (kg):</label>
-        <input type="number" id="weight" placeholder="70" step="0.1">
-      </div>
-    
-      <!--Height-->
-      <div class="form-group">
-        <label for="height">Height</label>
-        <input type="number" id="height" placeholder="175">
-      </div>
+    <!-- BMI Calculator -->
+<div class="card">
+  <h3>⚖️ BMI Calculator</h3>
 
-      <button class="btn" onclick="calculateBMI()">Calculate BMI</button>
-      <div id="bmiResult" class="bmi-result"></div>
-    </div>
+  <div class="form-group">
+    <label for="weight">Weight (kg):</label>
+    <input type="number" id="weight" placeholder="70" step="0.1">
+  </div>
 
-    <!--Nutrition Lookup-->
-    <div class="card">
-      <h3>🍎 Nutrition Lookup</h3>
-    <div class="form-group">
-<label for="foodQuery">Search Food:</label>
-<input type="text" id="foodQuery" placeholder="e.g., chicken breast,apple, oatmeal">
-    </div>
+  <div class="form-group">
+    <label for="height">Height (cm):</label>
+    <input type="number" id="height" placeholder="175">
+  </div>
 
-    <button class="btn" onclick="searchNutrition()">Search Nutrition</button>
-    <div id="nutritionResults" class="nutrition-results"></div>
-    </div>
+  <button class="btn" onclick="calculateBMI()">Calculate BMI</button>
+
+  <div id="bmiResult" class="bmi-result"></div>
+</div>
+
+ 
+
+    <!-- Nutrition Lookup -->
+<div class="card">
+  <h3>🍎 Nutrition Lookup</h3>
+
+  <div class="form-group">
+    <label for="foodQuery">Search Food:</label>
+    <input type="text" id="foodQuery" placeholder="e.g., chicken breast, apple, oatmeal">
+  </div>
+
+  <button class="btn" onclick="searchNutrition()">Search Nutrition</button>
+
+  <div id="nutritionResults" class="nutrition-results"></div>
+</div>
+
 
     <!--Achievements-->
     <div class="card">
@@ -172,6 +183,8 @@
 <footer class="footer">
   <p>&copy; 2025 FitTrack Pro. All rights reserved.</p>
 </footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<script src="assets/js/script.js"></script>
 </body>
 
 

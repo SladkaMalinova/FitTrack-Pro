@@ -1,3 +1,5 @@
+/* exported logWorkout, calculateBMI, searchNutrition */
+/* global Chart */
 /* jshint esversion: 6 */
 /* jshint esversion: 9 */
 //Global variables for data storage
@@ -9,6 +11,14 @@ let totalStats = {
   calories: 0,
   streak: 0
 };
+
+// Save data to local storage
+function saveData() {
+  localStorage.setItem('fittrack_workouts', JSON.stringify(workouts));
+  localStorage.setItem('fittrack_stats', JSON.stringify(totalStats));
+  localStorage.setItem('fittrack_achievements', JSON.stringify(achievements));
+}
+
 
 //Initialise the applicaiton
 function init() {
@@ -402,6 +412,7 @@ updateAchievementDisplay();
 saveData();
 }
 
+
 //Update achievement display
 function updateAchievementDisplay() {
   const badgesDiv = document.getElementById('badges');
@@ -454,6 +465,8 @@ function showNotification(message) {
     setTimeout(() => notification.remove(), 500);
   }, 2500);
 
-
+window.onload = function() {
+  init();
+};
 }
 
